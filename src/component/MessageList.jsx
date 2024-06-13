@@ -3,6 +3,15 @@ import moment from 'moment';
 import { BsSendFill } from 'react-icons/bs';
 
 const MessageList = ({ message, signedUser, handleMessage }) => {
+    // function formatMessage(message) {
+    //     // Ganti kode ini dengan logika pemformatan Anda
+    //     // Kode untuk memformat pesan dengan backtick, tanda kurung siku, dan asterisk
+    //     formattedMessage = message.replace('`', '\\`');
+    //     formattedMessage = formattedMessage.replace('[', '\\[');
+    //     formattedMessage = formattedMessage.replace(']', '\\]');
+    //     formattedMessage = formattedMessage.replace('*', '\\*');
+    //     return formattedMessage;
+    // }
 
     const formatMessage = (msg) => {
         if (/^https?:\/\//.test(msg)) {
