@@ -26,7 +26,7 @@ export default function ChatMenu({ onLogout, toggleMenu }) {
                 <div className="input-group">
                     <p>Pesan</p>
                     <textarea
-                        className="input-textarea resize-none max-h-40 overflow-y-auto"
+                        className="input-textarea resize-none text-[14px] overflow-y-auto"
                         value={data}
                         onChange={(e) => setData(e.target.value)}
                     />

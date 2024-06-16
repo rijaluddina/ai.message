@@ -54,7 +54,7 @@ export default function SplashScreen() {
                     </motion.button>
                 </motion.div>
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="fixed bottom-0 flex-col m-[2rem] justify-center items-center">
                 <div className="flex justify-center items-center p-3 text-gray-100">
                     <a href="https://github.com/rijaluddina" target="_blank">
                         <BsGithub className="text-2xl mr-4" />
@@ -66,7 +66,7 @@ export default function SplashScreen() {
                         <BsWhatsapp className="text-2xl mr-4" />
                     </a>
                 </div>
-                <footer className="fixed bottom-0 gap-2 text-gray-100 text-center p-4 mt-4 flex justify-center">
+                <footer className="flex bottom-0 gap-2 text-gray-100 text-center justify-center">
                     © 2024 GetMessage. All rights reserved.
                 </footer>
             </div>

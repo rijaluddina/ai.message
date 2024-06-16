@@ -35,7 +35,10 @@ export default function Chat() {
 
     // scroll to bottom
     const scrollToBottom = () => {
-        window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth' // Menambahkan animasi smooth pada scroll
+        });
     };
 
     // toggle menu
