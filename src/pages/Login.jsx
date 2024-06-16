@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { AvatarContext } from "../context/AvatarContext"
 import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion";
 
 export default function Login() {
 
@@ -9,7 +10,7 @@ export default function Login() {
 
     //clc
     useEffect(() => {
-        let user = localStorage.getItem("boring_chat_user")
+        let user = localStorage.getItem("getmessage")
         if (user) {
             return navigate("/chat")
         }
@@ -25,7 +26,7 @@ export default function Login() {
         e.preventDefault()
         let username = e.target.username.value
 
-        localStorage.setItem("boring_chat_user", JSON.stringify({
+        localStorage.setItem("getmessage", JSON.stringify({
             id: Date.now(),
             username: username,
             avatar: avatar
@@ -35,9 +36,13 @@ export default function Login() {
     }
 
     return (
-        <main className="w-screen h-screen p-8 bg-gradient-to-t from-orange-700 to-orange-500 flex flex-col">
-
-            <form className="w-full flex flex-col bg-white shadow-lg rounded-lg p-6 z-[100] gap-4" onSubmit={handleLogin}>
+        <main className="w-screen h-screen p-8 bg-gray-700 flex flex-col">
+            <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+            <form className="w-full flex flex-col bg-gray-300 shadow-lg rounded-lg p-6 z-[100] gap-4" onSubmit={handleLogin}>
 
                 <div className="relative w-28 mx-auto">
                     <img src={avatar} alt="avatar" className="w-28 h-28 mx-auto" />
@@ -50,17 +55,18 @@ export default function Login() {
 
                 <div className="flex flex-col gap-2">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" required className="w-full h-12 px-3 border-[1px] border-gray-400 rounded-lg" />
+                    <input type="text" id="username" required className="w-full h-12 px-3 border-[1px] focus:outline-none focus:ring-1 rounded-lg" />
                 </div>
 
-                <button className="w-full h-12 bg-black text-white rounded-lg" type="submit">
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full h-12 bg-blue-600 text-white mt-auto rounded-lg z-[100]"
+                >
                     Login
-                </button>
-            </form>
-
-            <img src="https://images.pexels.com/photos/3184435/pexels-photo-3184435.jpeg?auto=compress&cs=tinysrgb&w=500" alt=""
-                className="w-screen h-screen object-cover absolute opacity-25 top-0 left-0"
-            />
+                </motion.button>
+                </form>
+            </motion.div>
         </main>
     )
 }

@@ -1,44 +1,75 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { BsGithub, BsInstagram, BsWhatsapp } from "react-icons/bs";
 
 export default function SplashScreen() {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    // to login
     const toLogin = () => {
-        navigate("/login")
-    }
+        navigate("/login");
+    };
 
     useEffect(() => {
-        let user = localStorage.getItem("boring_chat_user")
+        let user = localStorage.getItem("getmessage");
         if (user) {
-            return navigate("/chat")
+            return navigate("/chat");
         }
-    }, [])
+    }, []);
 
     return (
-        <main className="w-screen h-screen p-8 bg-gradient-to-t from-orange-700 to-orange-500 flex flex-col">
-            <h1 className="text-[64px] text-white font-bold leading-10">
-                Boring
-                Chat App
-            </h1>
-
-            <p className="text-[16px] text-white font-semibold mt-4">
-                Chat apapun yang kamu mau
-                ke orang orang bosan
-                diseluruh dunia..
-            </p>
-
-            <button className="w-full h-10 bg-black text-white mt-auto rounded-lg z-[100]"
-                onClick={toLogin}
-            >
-                Login Now
-            </button>
-
-            <img src="https://images.pexels.com/photos/3184435/pexels-photo-3184435.jpeg?auto=compress&cs=tinysrgb&w=500" alt=""
-                className="w-screen h-screen object-cover absolute opacity-25 top-0 left-0"
-            />
-        </main>
-    )
+        <main className="w-screen h-screen p-8 bg-gray-700 flex flex-col justify-between">
+            <div
+                // style={{ borderInlineStart: "2px solid white" }}
+                className="flex flex-col">
+                <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h1
+                        style={{ borderBlockEnd: "2px solid white" }}
+                        className="text-[40px] pt-10 text-gray-300 font-bold leading-10">
+                        Getmessage
+                    </h1>
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <p className="text-[16px] pt-20 text-gray-100 font-semibold mt-4">
+                        Creating a simple AI API
+                        <br />
+                        for providing convenience
+                    </p>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-[50%] h-12 bg-blue-600 top-0 text-white mt-auto rounded-lg z-[100]"
+                        onClick={toLogin}
+                    >
+                        start trying
+                    </motion.button>
+                </motion.div>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+                <div className="flex justify-center items-center p-3 text-gray-100">
+                    <a href="https://github.com/rijaluddina" target="_blank">
+                        <BsGithub className="text-2xl mr-4" />
+                    </a>
+                    <a href="https://instagram.com/rjlddn.a_" target="_blank">
+                        <BsInstagram className="text-2xl mr-4" />
+                    </a>
+                    <a href="https://wa.me/6285161071745" target="_blank">
+                        <BsWhatsapp className="text-2xl mr-4" />
+                    </a>
+                </div>
+                <footer className="fixed bottom-0 gap-2 text-gray-100 text-center p-4 mt-4 flex justify-center">
+                    © 2024 GetMessage. All rights reserved.
+                </footer>
+            </div>
+        </main >
+    );
 }

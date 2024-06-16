@@ -1,88 +1,85 @@
 import React from 'react';
 import { useGroqContext } from '../context/GroqContext';
 import { Dropdown } from 'semantic-ui-react';
-import { BsEscape, BsGearWideConnected } from 'react-icons/bs';
+import { BsChevronRight } from 'react-icons/bs';
+import "../index.css";
 
 export default function ChatMenu({ onLogout, toggleMenu }) {
-    const { data, model, temperature, setData, setModel, setTemperature } = useGroqContext();
+
+    const { data, model, temperature, setData, setModel, setTemperature, max_tokens, setMax_tokens } = useGroqContext();
 
     const modelOptions = [
-        { text: 'llama3-70b-8192', value: 'llama3-70b-8192' },
-        { text: 'llama3-8b-8192', value: 'llama3-8b-8192' },
-        { text: 'gemma-7b-it', value: 'gemma-7b-it' },
-        { text: 'mixtral-8x7b-32768', value: 'mixtral-8x7b-32768' },
+        { key: 'llama3-70b-8192', text: 'llama3-70b-8192', value: 'llama3-70b-8192' },
+        { key: 'llama3-8b-8192', text: 'llama3-8b-8192', value: 'llama3-8b-8192' },
+        { key: 'gemma-7b-it', text: 'gemma-7b-it', value: 'gemma-7b-it' },
+        { key: 'mixtral-8x7b-32768', text: 'mixtral-8x7b-32768', value: 'mixtral-8x7b-32768' },
     ];
 
-    const handleDataChange = (event) => {
-        setData(event.target.value);
-    };
-
-    const handleModelChange = (value) => {
-        setModel(value);
-    };
-
-    const handleTemperatureChange = (event) => {
-        const inputValue = event.target.value;
-        const parsedValue = parseFloat(inputValue);
-        if (!isNaN(parsedValue)) {
-            setTemperature(parsedValue);
-        }
-    };
-
     return (
-        <div
-            className="w-xl fixed right-0 top-0 h-full bg-white p-4 shadow-lg box-border">
-            <div className="flex flex-col mb-4">
-                <div
-                    onClick={toggleMenu}
-                    className="cursor-pointer hover:text-blue-500">
-                    <BsGearWideConnected className="inline-block mr-2 transition-transform duration-200 hover:rotate-90" /> Settings
-                </div>
-                <div
-                    onClick={onLogout}
-                    className="cursor-pointer hover:text-red-500">
-                    <BsEscape className="inline-block mr-2 transition-transform duration-200 hover:rotate-90" /> Logout
+        <div className="chat-menu bg-gray-300">
+            <div className="menu-header">
+                <div onClick={toggleMenu} className="menu-item">
+                    <BsChevronRight className="menu-icon" />
                 </div>
             </div>
-            <div className="flex flex-col ">
-                <div style={{ marginBottom: '20px' }}>
-                    <p style={{ display: 'block', marginBottom: '5px' }} htmlFor='data'>pesan</p>
+            <div className="menu-body">
+                <div className="input-group">
+                    <p>Pesan</p>
                     <textarea
-                        className="resize-none w-full h-40 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue"
+                        className="input-textarea resize-none max-h-40 overflow-y-auto"
                         value={data}
-                        onChange={handleDataChange}
+                        onChange={(e) => setData(e.target.value)}
                     />
                 </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <p style={{ display: 'block', marginBottom: '5px' }} htmlFor='model'>model</p>
+                <div className="input-group">
+                    <p>Model</p>
                     <Dropdown
                         button
                         selection
-                        className='w-full bg-white boder rounded-md'
-                        floating
-                        search
-                        fluid
+                        className='input-dropdown'
                         options={modelOptions}
-                        text={model}
-                        onChange={(event, { value }) => handleModelChange(value)}
+                        value={model}
+                        onChange={(e, { value }) => setModel(value)}
                     />
                 </div>
-                <div className='flex flex-col gap-2 justify-between'>
-                    <button
-                        className="w-[20%] items-end text-right p-1 border rounded-md"
-                    >{temperature}
-                    </button>
+                <div className="input-group">
+                    <div className="flex justify-between">
+                        <p>temperature</p>
+                        <p
+                            style={{ border: '1px, solid, gray-500' }}
+                            className='w-[15%] text-right rounded-md'>{temperature.toFixed(2)}</p>
+                    </div>
                     <input
-                        className="w-full gap-4 gray-500"
-                        onChange={handleTemperatureChange}
+                        className="input-range w-full cursor-pointer"
+                        onChange={(e) => setTemperature(parseFloat(e.target.value))}
                         value={temperature}
                         type="range"
                         min={0}
                         max={2}
                         step={0.01}
                     />
+                    <div className="flex justify-between">
+                        <p>max tokens</p>
+                        <p
+                            style={{border:'1px, solid, gray-500'}}
+                            className='w-[15%] text-right rounded-md'>{max_tokens}</p>
+                    </div>
+                    <input
+                        className="w-full cursor-pointer"
+                        onChange={(e) => setMax_tokens(parseInt(e.target.value))}
+                        value={max_tokens}
+                        type="range"
+                        min={0}
+                        max={8192}
+                        step={1}
+                    />
                 </div>
             </div>
+            <div className='flex justify-end items-center mb-4'>
+                <button onClick={onLogout} className='bg-gray-500 text-white px-4 py-2 rounded-md'>
+                    Logout
+                </button>
+            </div>
         </div>
-    )
+    );
 };
