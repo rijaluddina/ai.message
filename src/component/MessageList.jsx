@@ -56,45 +56,6 @@ const MessageList = ({ message, signedUser, handleMessage }) => {
                             >
                                 {e.message}
                             </ReactMarkdown>
-
-                            {/* <ReactMarkdown
-                                className={`${e.user.username !== signedUser.username ? "text-left" : "text-right"} markdown-justify`}
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeRaw]}
-                                components={{
-                                    code({ node, inline, className, children, ...props }) {
-                                        const match = /language-(\w+)/.exec(className || '')
-                                        if (!inline && match) {
-                                            // Fenced Code Block dengan Syntax Highlighting
-                                            return (
-                                                <SyntaxHighlighter
-                                                    style={atomDark}
-                                                    language={match[1]}
-                                                    children={String(children).replace(/\n$/, '')}
-                                                    {...props}
-                                                />
-                                            );
-                                        } else if (!inline) {
-                                            // Indented Code Block tanpa syntax highlighting
-                                            return (
-                                                <pre {...props}>
-                                                    <code className={className} {...props}>
-                                                        {children}
-                                                    </code>
-                                                </pre>
-                                            );
-                                        } else {
-                                            // Inline code
-                                            return <code className={className} {...props}>{children}</code>;
-                                        }
-                                    },
-                                    p({ node, children, ...props }) {
-                                        return <p style={{ textAlign: 'justify' }} {...props}>{children}</p>;
-                                    }
-                                }}>
-                                {e.message}
-                            </ReactMarkdown> */}
-
                             <div className="mt-4 flex gap-2 items-center">
                                 <img src={e.user.avatar} alt="" className="w-5 h-5" />
                                 <div className="flex flex-col text-gray-400">
