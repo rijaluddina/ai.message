@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { useChatContext } from "../context/ChatContext";
 import { useGroqContext } from "../context/GroqContext";
 import { useNavigate } from "react-router-dom";
@@ -7,15 +7,11 @@ import ChatHeader from "../component/ChatHeader";
 import ChatMenu from "../component/ChatMenu";
 import Groq from "groq-sdk";
 
-
 export default function Chat() {
-
-    //state
     const navigate = useNavigate();
     const chatMenuRef = useRef(null);
     const { message, setMessage, loading, setLoading, showMenu, setShowMenu, signedUser, setSignedUser } = useChatContext();
     const { data, model, temperature, top_p, max_tokens, stream, stop } = useGroqContext();
-
 
     useEffect(() => {
         const user = localStorage.getItem("getmessage");
@@ -33,7 +29,6 @@ export default function Chat() {
         }
     }, [message]);
 
-    // scroll to bottom
     const scrollToBottom = () => {
         window.scrollTo({
             top: document.body.scrollHeight,
@@ -41,7 +36,6 @@ export default function Chat() {
         });
     };
 
-    // toggle menu
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
@@ -51,20 +45,21 @@ export default function Chat() {
         navigate("/");
     };
 
-
     const GROQ = import.meta.env.VITE_GROQ_API;
     const groq = new Groq({
         apiKey: GROQ,
         dangerouslyAllowBrowser: true,
     });
 
+    const messagesHistory = useMemo(() => {
+        return message.map((msg) => ({
+            role: msg.user.id === signedUser.id ? 'user' : 'assistant',
+            content: msg.message,
+        }));
+    }, [message, signedUser]);
+
     const requestToGroqAI = async (content) => {
         try {
-            // Menambahkan riwayat pesan ke dalam permintaan
-            const messagesHistory = message.map(msg => ({
-                role: msg.user.id === signedUser.id ? 'user' : 'assistant',
-                content: msg.message
-            }));
 
             // Menambahkan pesan terbaru ke riwayat
             messagesHistory.push({
@@ -74,12 +69,12 @@ export default function Chat() {
 
             const chatCompletion = await groq.chat.completions.create({
                 messages: [{ role: "system", content: data }, ...messagesHistory],
-                model: model,
-                temperature: temperature,
-                max_tokens: max_tokens,
-                top_p: top_p,
-                stream: stream,
-                stop: stop
+                model,
+                temperature,
+                max_tokens,
+                top_p,
+                stream,
+                stop
             });
 
             let fullResponse = "";
@@ -92,7 +87,6 @@ export default function Chat() {
             return "maaf nih saya lagi error";
         }
     };
-
     const AI = async (content) => {
         const aiResponse = await requestToGroqAI(content);
         if (aiResponse) {
@@ -103,7 +97,7 @@ export default function Chat() {
                     avatar: `https://api.multiavatar.com/${Date.now()}.svg`,
                 },
             };
-            setMessage(prevMessages => [...prevMessages, newMessage]);
+            setMessage((prevMessages) => [...prevMessages, newMessage]);
         }
     };
 
@@ -134,7 +128,6 @@ export default function Chat() {
 
     return (
         <main className="w-screen h-screen flex bg-gray-300 flex-col">
-
             <ChatHeader signedUser={signedUser} toggleMenu={toggleMenu} />
             <MessageList message={message} signedUser={signedUser} handleMessage={handleMessage} />
             {showMenu && (
@@ -142,8 +135,6 @@ export default function Chat() {
                     <ChatMenu onLogout={handleLogout} toggleMenu={toggleMenu} />
                 </div>
             )}
-
         </main>
     )
 }
-
