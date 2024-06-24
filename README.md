@@ -1,4 +1,4 @@
-[ai.message](https://rjlddna.netlify.app/) is a simple template that provides minimal settings for using the AI ​​API so that it can be used properly.
+[ai.message](https://rjlddna.netlify.app/) is a simple template that provides minimal settings for using the [`Groq ​​API`](https://console.groq.com/docs/quickstart) so that it can be used properly.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ npm install
 ```bash
 npm run dev
 ```
-You can now the app on [http://localhost:5173](http://localhost:5173).
+You can now use the app on [http://localhost:5173](http://localhost:5173).
 
 ## Learn More
 
