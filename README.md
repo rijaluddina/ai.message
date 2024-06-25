@@ -19,6 +19,12 @@ cd ai.message
 npm install
 ```
 
+- Add your grorq API to the `.env` file:
+
+```
+GROQ_API_KEY=<YOUR_GROQ_API_KEY>
+```
+
 - Start the app:
 
 ```bash
