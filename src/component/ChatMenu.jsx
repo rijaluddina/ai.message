@@ -10,9 +10,9 @@ export default function ChatMenu({ onLogout, toggleMenu }) {
 
     const modelOptions = [
         { key: 'llama3-70b-8192', text: 'llama3-70b-8192', value: 'llama3-70b-8192' },
+        { key: 'gemma2-9b-it', text:'gemma2-9b-it', value:'gemma2-9b-it'},
         { key: 'llama3-8b-8192', text: 'llama3-8b-8192', value: 'llama3-8b-8192' },
         { key: 'gemma-7b-it', text: 'gemma-7b-it', value: 'gemma-7b-it' },
-        { key: 'gemma2-9b-it', text:'gemma2-9b-it', value:'gemma2-9b-it'},
         { key: 'mixtral-8x7b-32768', text: 'mixtral-8x7b-32768', value: 'mixtral-8x7b-32768' },
     ];
 
