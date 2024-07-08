@@ -8,7 +8,7 @@ export function useGroqContext() {
 
 export default function ChatContextProvider({ children }) {
     const [data, setData] = useState("");
-    const [model, setModel] = useState("llama3-70b-8192");
+    const [model, setModel] = useState("gemma2-9b-it");
     const [temperature, setTemperature] = useState(0.75);
     const [max_tokens, setMax_tokens] = useState(1024);
     const [top_p, setTop_p] = useState(1);
