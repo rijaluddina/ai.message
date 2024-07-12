@@ -22,6 +22,11 @@ const MessageList = ({ message, signedUser, handleMessage }) => {
         }
     }, [content])
 
+    const getLanguageFromClassName = (className) => {
+        const match = /language-(\w+)/.exec(className);
+        return match && match[1];
+      };      
+
     return (
         <main className='flex flex-col'>
             <div className="w-full mt-auto px-2 py-[80px] bg-gray-300 flex flex-col gap-4">
@@ -51,7 +56,12 @@ const MessageList = ({ message, signedUser, handleMessage }) => {
                                     },
                                     p({ node, children, ...props }) {
                                         return <p style={{ textAlign: 'justify' }} {...props}>{children}</p>;
-                                    }
+                                    },
+                                    a: ({ node, children, ...props }) => (
+                                        <a {...props} style={{ color: 'blue', textDecoration: 'underline' }}>
+                                          {children}
+                                        </a>
+                                      )
                                 }}
                             >
                                 {e.message}
@@ -85,7 +95,7 @@ const MessageList = ({ message, signedUser, handleMessage }) => {
                     minLength="3"
                     className={`text-justify grid resize-none focus:outline-none focus:ring-1 ${isMultiLine ? 'rounded-md' : 'rounded-full'} py-2 px-4 bg-white h-10 flex-1`}
                     onChange={(e) => setContent(e.target.value)}
-                    style={{ maxHeight: '6em', overflowY: 'hidden' }} />
+                    style={{ maxHeight: '6em', overflowY: 'auto' }} />
                 <button>
                     <BsSendFill className="cursor-pointer size-7 rotate-45" />
                 </button>
