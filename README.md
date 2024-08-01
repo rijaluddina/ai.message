@@ -22,7 +22,7 @@ npm install
 - Add your grorq API to the `.env` file:
 
 ```
-GROQ_API_KEY=<YOUR_GROQ_API_KEY>
+VITE_GROQ_API=<YOUR_GROQ_API_KEY>
 ```
 
 - Start the app:
