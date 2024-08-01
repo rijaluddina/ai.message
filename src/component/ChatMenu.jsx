@@ -9,11 +9,16 @@ export default function ChatMenu({ onLogout, toggleMenu }) {
     const { data, model, temperature, setData, setModel, setTemperature, max_tokens, setMax_tokens } = useGroqContext();
 
     const modelOptions = [
+        { key: 'llama-3.1-70b-versatile', text: 'llama-3.1-70b-versatile', value: 'llama-3.1-70b-versatile' },
         { key: 'llama3-70b-8192', text: 'llama3-70b-8192', value: 'llama3-70b-8192' },
         { key: 'gemma2-9b-it', text:'gemma2-9b-it', value:'gemma2-9b-it'},
+        { key: 'llama-3.1-8b-instant', text:'llama-3.1-8b-instant', value:'llama-3.1-8b-instant'},
         { key: 'llama3-8b-8192', text: 'llama3-8b-8192', value: 'llama3-8b-8192' },
+        { key: 'llama-guard-3-8b', text: 'llama-guard-3-8b', value: 'llama-guard-3-8b' },
         { key: 'gemma-7b-it', text: 'gemma-7b-it', value: 'gemma-7b-it' },
         { key: 'mixtral-8x7b-32768', text: 'mixtral-8x7b-32768', value: 'mixtral-8x7b-32768' },
+        { key: 'llama3-groq-70b-8192-tool-use-preview', text: 'llama3-groq-70b-8192-tool-use-preview', value: 'llama3-groq-70b-8192-tool-use-preview' },
+        { key: 'llama3-groq-8b-8192-tool-use-preview', text: 'llama3-groq-8b-8192-tool-use-preview', value: 'llama3-groq-8b-8192-tool-use-preview' },    
     ];
 
     return (
