@@ -9,6 +9,10 @@ export default function ChatMenu({ onLogout, toggleMenu }) {
     const { data, model, temperature, setData, setModel, setTemperature, max_tokens, setMax_tokens } = useGroqContext();
 
     const modelOptions = [
+        { key: 'llama-3.2-90b-vision-preview', text: 'llama-3.2-90b-vision-preview', value: 'llama-3.2-90b-vision-preview' },
+        { key: 'llama-3.2-90b-text-preview', text: 'llama-3.2-90b-text-preview', value: 'llama-3.2-90b-text-preview' },
+        { key: 'llama-3.2-11b-vision-preview', text: 'llama-3.2-11b-vision-preview', value: 'llama-3.2-11b-vision-preview' },
+        { key: 'llama-3.2-11b-text-preview', text: 'llama-3.2-11b-text-preview', value: 'llama-3.2-11b-text-preview' },
         { key: 'llama-3.1-70b-versatile', text: 'llama-3.1-70b-versatile', value: 'llama-3.1-70b-versatile' },
         { key: 'llama3-70b-8192', text: 'llama3-70b-8192', value: 'llama3-70b-8192' },
         { key: 'gemma2-9b-it', text:'gemma2-9b-it', value:'gemma2-9b-it'},
