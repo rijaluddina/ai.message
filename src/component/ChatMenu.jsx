@@ -28,11 +28,6 @@ export default function ChatMenu({ onLogout, toggleMenu }) {
       value: "llama-3.2-11b-vision-preview",
     },
     {
-      key: "llama-3.2-11b-text-preview",
-      text: "llama-3.2-11b-text-preview",
-      value: "llama-3.2-11b-text-preview",
-    },
-    {
       key: "llama-3.1-70b-versatile",
       text: "llama-3.1-70b-versatile",
       value: "llama-3.1-70b-versatile",
